@@ -3,7 +3,6 @@ package algorithm
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"time"
 
 	"github.com/muwanyou/nonba-sdk/enum"
@@ -35,7 +34,6 @@ func (c *Client) GetCharacter(ctx context.Context, params *GetCharacterParams) (
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println(query)
 	request := NewRequest()
 	request.SetContext(ctx).
 		SetMethod(enum.MethodGet).
