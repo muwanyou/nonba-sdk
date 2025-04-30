@@ -12,7 +12,7 @@ import (
 type GetCharacterParams struct {
 	FamilyName string    `json:"family_name"`
 	GivenName  string    `json:"given_name"`
-	Sex        enum.Sex  `json:"sex,string"`
+	Sex        enum.Sex  `json:"sex"`
 	Birthday   time.Time `json:"birthday"`
 	Year       int16     `json:"year,string"`
 	Height     int16     `json:"height,string"`
