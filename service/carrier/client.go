@@ -23,7 +23,7 @@ func NewRequest() *Request {
 	request := new(Request)
 	request.Init().
 		WithScheme(enum.SchemeHttps).
-		WithHost("carrier.nonba.net").
+		WithHost("api.carrier.nonba.net").
 		WithPort(443).
 		WithVersion("1")
 	return request

@@ -22,9 +22,9 @@ type Request struct {
 func NewRequest() *Request {
 	request := new(Request)
 	request.Init().
-		WithScheme(enum.SchemeHttp).
-		WithHost("192.168.1.90").
-		WithPort(8010).
+		WithScheme(enum.SchemeHttps).
+		WithHost("api.algorithm.nonba.net").
+		WithPort(443).
 		WithVersion("1")
 	return request
 }
