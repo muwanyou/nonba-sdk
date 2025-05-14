@@ -8,9 +8,9 @@ import (
 )
 
 type SubmitVerificationParams struct {
+	PhoneNumber        string `json:"phone_number"`
 	FullName           string `json:"full_number"`
 	IdentityCardNumber string `json:"identity_card_number"`
-	PhoneNumber        string `json:"phone_number"`
 }
 
 type SubmitVerificationResult struct {
