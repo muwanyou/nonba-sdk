@@ -13,7 +13,7 @@ type GetCharacterParams struct {
 	GivenName  string    `json:"given_name"`
 	Sex        enum.Sex  `json:"sex"`
 	Birthday   time.Time `json:"birthday"`
-	Year       int16     `json:"year,string"`
+	Datetime   time.Time `json:"datetime"`
 	Height     int16     `json:"height,string"`
 	Weight     int16     `json:"weight,string"`
 }
