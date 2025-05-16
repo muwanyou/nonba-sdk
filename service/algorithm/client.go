@@ -42,14 +42,14 @@ func NewResponse() *Response {
 }
 
 type Dimension struct {
-	ID      int64
-	Name    string
-	Alias   string
-	Entries []Entry
+	ID      int64   `json:"id,string"`
+	Name    string  `json:"name"`
+	Alias   string  `json:"alias"`
+	Entries []Entry `json:"entries"`
 }
 
 type Entry struct {
-	ID          int64
-	Name        string
-	Description string
+	ID          int64  `json:"id,string"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
 }
