@@ -26,7 +26,7 @@ type ListPersonalitiesParams struct {
 
 // 性格列表结果
 type ListPersonalitiesResult struct {
-	Items []*Personalitiey
+	Items []*Personalitiey `json:"items"`
 }
 
 // 获取性格列表
@@ -71,9 +71,7 @@ type ListPersonalityDimensionsParams struct {
 
 // 性格纬度列表结果
 type ListPersonalityDimensionsResult struct {
-	Before []Dimension `json:"before"`
-	Now    []Dimension `json:"now"`
-	After  []Dimension `json:"after"`
+	Items []Dimension `json:"items"`
 }
 
 // 获取性格纬度列表
