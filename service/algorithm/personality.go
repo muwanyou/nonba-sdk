@@ -90,7 +90,7 @@ func (c *Client) ListPersonalityDimensions(ctx context.Context, param *ListPerso
 	request := NewRequest()
 	request.SetContext(ctx).
 		SetMethod(enum.MethodGet).
-		SetPath(fmt.Sprintf("/personalities/%s/dimensions/", param.Timeline)).
+		SetPath(fmt.Sprintf("/personalities/%s/dimensions", param.Timeline)).
 		SetQuery(query)
 	response := NewResponse()
 	err = c.Send(request, response)
