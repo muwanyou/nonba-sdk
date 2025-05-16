@@ -10,7 +10,7 @@ import (
 )
 
 type Personality struct {
-	ID          int64  `json:"id"`
+	ID          int64  `json:"id,string"`
 	Name        string `json:"name"`
 	Alias       string `json:"alias"`
 	Positive    string `json:"positive"`
