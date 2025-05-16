@@ -9,7 +9,18 @@ import (
 	"github.com/muwanyou/nonba-sdk/enum"
 )
 
-type Personality struct {
+// 性格参数
+type GetPersonalityParam struct {
+	Timeline   enum.Timeline `json:"timeline"`
+	FamilyName string        `json:"family_name"`
+	GivenName  string        `json:"given_name"`
+	Sex        enum.Sex      `json:"sex"`
+	Birthday   time.Time     `json:"birthday"`
+	Datetime   time.Time     `json:"datetime"`
+}
+
+// 性格结果
+type GetPersonalityResult struct {
 	ID          int64  `json:"id,string"`
 	Name        string `json:"name"`
 	Alias       string `json:"alias"`
@@ -19,20 +30,9 @@ type Personality struct {
 	Description string `json:"description"`
 }
 
-// 性格列表参数
-type ListPersonalitiesParam struct {
-	FamilyName string `json:"family_name"`
-	GivenName  string `json:"given_name"`
-}
-
-// 性格列表结果
-type ListPersonalitiesResult struct {
-	Items []*Personality `json:"items"`
-}
-
-// 获取性格列表
-func (c *Client) ListPersonalities(ctx context.Context, params *ListPersonalitiesParam) (*ListPersonalitiesResult, error) {
-	bytes, err := json.Marshal(params)
+// 获取性格
+func (c *Client) GetPersonality(ctx context.Context, param *GetPersonalityParam) (*GetPersonalityResult, error) {
+	bytes, err := json.Marshal(param)
 	if err != nil {
 		return nil, err
 	}
@@ -44,14 +44,14 @@ func (c *Client) ListPersonalities(ctx context.Context, params *ListPersonalitie
 	request := NewRequest()
 	request.SetContext(ctx).
 		SetMethod(enum.MethodGet).
-		SetPath("/personalities").
+		SetPath(fmt.Sprintf("/personalities/%s", param.Timeline)).
 		SetQuery(query)
 	response := NewResponse()
 	err = c.Send(request, response)
 	if err != nil {
 		return nil, err
 	}
-	result := new(ListPersonalitiesResult)
+	result := new(GetPersonalityResult)
 	err = json.Unmarshal(response.GetBody(), &result)
 	if err != nil {
 		return nil, err
@@ -90,7 +90,7 @@ func (c *Client) ListPersonalityDimensions(ctx context.Context, param *ListPerso
 	request := NewRequest()
 	request.SetContext(ctx).
 		SetMethod(enum.MethodGet).
-		SetPath(fmt.Sprintf("/personality/dimensions/%s", param.Timeline)).
+		SetPath(fmt.Sprintf("/personalities/%s/dimensions/", param.Timeline)).
 		SetQuery(query)
 	response := NewResponse()
 	err = c.Send(request, response)
