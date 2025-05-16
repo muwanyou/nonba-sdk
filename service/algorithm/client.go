@@ -40,3 +40,16 @@ func NewResponse() *Response {
 	response := new(Response)
 	return response
 }
+
+type Dimension struct {
+	ID      int64
+	Name    string
+	Alias   string
+	Entries []Entry
+}
+
+type Entry struct {
+	ID          int64
+	Name        string
+	Description string
+}
