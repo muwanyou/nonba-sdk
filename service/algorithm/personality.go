@@ -60,13 +60,14 @@ func (c *Client) ListPersonalities(ctx context.Context, params *ListPersonalitie
 
 // 性格纬度列表参数
 type ListPersonalityDimensionsParams struct {
-	FamilyName string    `json:"family_name"`
-	GivenName  string    `json:"given_name"`
-	Sex        enum.Sex  `json:"sex"`
-	Birthday   time.Time `json:"birthday"`
-	Datetime   time.Time `json:"datetime"`
-	Height     int16     `json:"height"`
-	Weight     int16     `json:"weight"`
+	Timeline   enum.Timeline `json:"timeline"`
+	FamilyName string        `json:"family_name"`
+	GivenName  string        `json:"given_name"`
+	Sex        enum.Sex      `json:"sex"`
+	Birthday   time.Time     `json:"birthday"`
+	Datetime   time.Time     `json:"datetime"`
+	Height     int16         `json:"height"`
+	Weight     int16         `json:"weight"`
 }
 
 // 性格纬度列表结果
