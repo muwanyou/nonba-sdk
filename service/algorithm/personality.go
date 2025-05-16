@@ -10,23 +10,19 @@ import (
 
 // 性格列表参数
 type ListPersonalitiesParams struct {
-	FamilyName string    `json:"family_name"`
-	GivenName  string    `json:"given_name"`
-	Sex        enum.Sex  `json:"sex"`
-	Birthday   time.Time `json:"birthday"`
-	Datetime   time.Time `json:"datetime"`
-	Height     int16     `json:"height,string"`
-	Weight     int16     `json:"weight,string"`
+	FamilyName string `json:"family_name"`
+	GivenName  string `json:"given_name"`
 }
 
 // 性格列表结果
 type ListPersonalitiesResult struct {
-	ID       int64
-	Name     string
-	Alias    string
-	Positive string
-	Negative string
-	Solve    string
+	ID          int64
+	Name        string
+	Alias       string
+	Positive    string
+	Negative    string
+	Solve       string
+	Description string
 }
 
 // 获取性格列表
@@ -65,8 +61,8 @@ type ListPersonalityDimensionsParams struct {
 	Sex        enum.Sex  `json:"sex"`
 	Birthday   time.Time `json:"birthday"`
 	Datetime   time.Time `json:"datetime"`
-	Height     int16     `json:"height,string"`
-	Weight     int16     `json:"weight,string"`
+	Height     int16     `json:"height"`
+	Weight     int16     `json:"weight"`
 }
 
 // 性格纬度列表结果
