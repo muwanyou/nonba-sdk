@@ -8,31 +8,31 @@ import (
 	"github.com/muwanyou/nonba-sdk/enum"
 )
 
-type CreateRefundParams struct {
-	Reason      string                   `json:"reason"`
-	ClientIP    string                   `json:"client_ip"`
-	Transaction *RefundTransactionParams `json:"transaction"`
-	Order       *RefundOrderParams       `json:"order"`
-	Amount      *RefundAmountParams      `json:"amount"`
-	NotifyUrl   string                   `json:"notify_url"`
+type CreateRefundParam struct {
+	Reason      string                  `json:"reason"`
+	ClientIP    string                  `json:"client_ip"`
+	Transaction *RefundTransactionParam `json:"transaction"`
+	Order       *RefundOrderParam       `json:"order"`
+	Amount      *RefundAmountParam      `json:"amount"`
+	NotifyUrl   string                  `json:"notify_url"`
 }
 
-type RefundTransactionParams struct {
+type RefundTransactionParam struct {
 	Number string `json:"number"`
 }
 
-type RefundOrderParams struct {
+type RefundOrderParam struct {
 	Number string `json:"number"`
 }
 
-type RefundAmountParams struct {
+type RefundAmountParam struct {
 	Currency string `json:"currency"`
 	Total    int64  `json:"total"`
 }
 
 type CreateRefundResult struct {
-	Transaction *RefundTransactionParams `json:"transaction"`
-	Order       *RefundOrderParams       `json:"order"`
+	Transaction *RefundTransactionParam `json:"transaction"`
+	Order       *RefundOrderParam       `json:"order"`
 }
 
 type RefundTransactionResult struct {
@@ -43,15 +43,15 @@ type RefundOrderResult struct {
 	Number string `json:"number"`
 }
 
-func (c *Client) CreateRefund(ctx context.Context, params *CreateRefundParams) (*CreateRefundResult, error) {
-	body, err := json.Marshal(params)
+func (c *Client) CreateRefund(ctx context.Context, param *CreateRefundParam) (*CreateRefundResult, error) {
+	body, err := json.Marshal(param)
 	if err != nil {
 		return nil, err
 	}
 	request := NewRequest()
 	request.SetContext(ctx).
 		SetMethod(enum.MethodPost).
-		SetPath(fmt.Sprintf("/charges/%s/refunds", params.Transaction.Number)).
+		SetPath(fmt.Sprintf("/charges/%s/refunds", param.Transaction.Number)).
 		SetBody(body)
 	response := NewResponse()
 	err = c.Send(request, response)

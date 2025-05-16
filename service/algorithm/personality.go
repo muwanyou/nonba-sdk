@@ -3,34 +3,35 @@ package algorithm
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"time"
 
 	"github.com/muwanyou/nonba-sdk/enum"
 )
 
-type Personalitiey struct {
-	ID          int64
-	Name        string
-	Alias       string
-	Positive    string
-	Negative    string
-	Solve       string
-	Description string
+type Personality struct {
+	ID          int64  `json:"id"`
+	Name        string `json:"name"`
+	Alias       string `json:"alias"`
+	Positive    string `json:"positive"`
+	Negative    string `json:"negative"`
+	Solve       string `json:"solve"`
+	Description string `json:"description"`
 }
 
 // 性格列表参数
-type ListPersonalitiesParams struct {
+type ListPersonalitiesParam struct {
 	FamilyName string `json:"family_name"`
 	GivenName  string `json:"given_name"`
 }
 
 // 性格列表结果
 type ListPersonalitiesResult struct {
-	Items []*Personalitiey `json:"items"`
+	Items []*Personality `json:"items"`
 }
 
 // 获取性格列表
-func (c *Client) ListPersonalities(ctx context.Context, params *ListPersonalitiesParams) (*ListPersonalitiesResult, error) {
+func (c *Client) ListPersonalities(ctx context.Context, params *ListPersonalitiesParam) (*ListPersonalitiesResult, error) {
 	bytes, err := json.Marshal(params)
 	if err != nil {
 		return nil, err
@@ -59,7 +60,7 @@ func (c *Client) ListPersonalities(ctx context.Context, params *ListPersonalitie
 }
 
 // 性格纬度列表参数
-type ListPersonalityDimensionsParams struct {
+type ListPersonalityDimensionsParam struct {
 	Timeline   enum.Timeline `json:"timeline"`
 	FamilyName string        `json:"family_name"`
 	GivenName  string        `json:"given_name"`
@@ -76,8 +77,8 @@ type ListPersonalityDimensionsResult struct {
 }
 
 // 获取性格纬度列表
-func (c *Client) ListPersonalityDimensions(ctx context.Context, params *ListPersonalityDimensionsParams) (*ListPersonalityDimensionsResult, error) {
-	bytes, err := json.Marshal(params)
+func (c *Client) ListPersonalityDimensions(ctx context.Context, param *ListPersonalityDimensionsParam) (*ListPersonalityDimensionsResult, error) {
+	bytes, err := json.Marshal(param)
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +90,7 @@ func (c *Client) ListPersonalityDimensions(ctx context.Context, params *ListPers
 	request := NewRequest()
 	request.SetContext(ctx).
 		SetMethod(enum.MethodGet).
-		SetPath("/personality/dimensions").
+		SetPath(fmt.Sprintf("/personality/dimensions/%s", param.Timeline)).
 		SetQuery(query)
 	response := NewResponse()
 	err = c.Send(request, response)

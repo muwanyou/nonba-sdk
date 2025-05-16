@@ -7,7 +7,7 @@ import (
 	"github.com/muwanyou/nonba-sdk/enum"
 )
 
-type SubmitVerificationParams struct {
+type SubmitVerificationParam struct {
 	PhoneNumber        string `json:"phone_number"`
 	FullName           string `json:"full_name"`
 	IdentityCardNumber string `json:"identity_card_number"`
@@ -16,7 +16,7 @@ type SubmitVerificationParams struct {
 type SubmitVerificationResult struct {
 }
 
-func (c *Client) SubmitVerification(ctx context.Context, params *SubmitVerificationParams) (*SubmitVerificationResult, error) {
+func (c *Client) SubmitVerification(ctx context.Context, params *SubmitVerificationParam) (*SubmitVerificationResult, error) {
 	body, err := json.Marshal(params)
 	if err != nil {
 		return nil, err

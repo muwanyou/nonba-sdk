@@ -7,7 +7,7 @@ import (
 	"github.com/muwanyou/nonba-sdk/enum"
 )
 
-type SendMessageParams struct {
+type SendMessageParam struct {
 	TemplateID     int64    `json:"template_id,omitempty"`
 	SignatureID    int64    `json:"signature_id,omitempty"`
 	PhoneNumber    string   `json:"phone_number,omitempty"`
@@ -18,8 +18,8 @@ type SendMessageResult struct {
 	ID int64 `json:"id,string,omitempty"`
 }
 
-func (c *Client) SendMessage(ctx context.Context, params *SendMessageParams) (*SendMessageResult, error) {
-	body, err := json.Marshal(params)
+func (c *Client) SendMessage(ctx context.Context, param *SendMessageParam) (*SendMessageResult, error) {
+	body, err := json.Marshal(param)
 	if err != nil {
 		return nil, err
 	}
