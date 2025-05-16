@@ -8,6 +8,16 @@ import (
 	"github.com/muwanyou/nonba-sdk/enum"
 )
 
+type Personalitiey struct {
+	ID          int64
+	Name        string
+	Alias       string
+	Positive    string
+	Negative    string
+	Solve       string
+	Description string
+}
+
 // 性格列表参数
 type ListPersonalitiesParams struct {
 	FamilyName string `json:"family_name"`
@@ -16,13 +26,7 @@ type ListPersonalitiesParams struct {
 
 // 性格列表结果
 type ListPersonalitiesResult struct {
-	ID          int64
-	Name        string
-	Alias       string
-	Positive    string
-	Negative    string
-	Solve       string
-	Description string
+	Items []*Personalitiey
 }
 
 // 获取性格列表
