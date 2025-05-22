@@ -17,8 +17,8 @@ func TestGetCycle(t *testing.T) {
 	result, err := client.GetCycle(ctx, &algorithm.GetCycleParam{
 		TimeUnit:   enum.TimeUnitYear,
 		Polarity:   enum.CyclePolarityPositive,
-		FamilyName: "颜",
-		GivenName:  "吉灿",
+		FamilyName: "张",
+		GivenName:  "三丰",
 		Sex:        enum.SexMale,
 		Birthday:   time.Now(),
 		Datetime:   time.Now(),
@@ -36,8 +36,8 @@ func TestListCycleDimensions(t *testing.T) {
 	result, err := client.ListCycleDimensions(ctx, &algorithm.ListCycleDimensionsParam{
 		TimeUnit:   enum.TimeUnitYear,
 		Polarity:   enum.CyclePolarityPositive,
-		FamilyName: "颜",
-		GivenName:  "吉灿",
+		FamilyName: "张",
+		GivenName:  "三丰",
 		Sex:        enum.SexMale,
 		Birthday:   time.Now(),
 		Datetime:   time.Now(),

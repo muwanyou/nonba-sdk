@@ -27,8 +27,8 @@ func TestListPotentialDimensions(t *testing.T) {
 	credential := core.NewCredential("3b6d4e442cf7422cb8431419068802f6", "1", "PJ8^yl*s5jG*Yvhlgm5N!u0Suljnx^K&")
 	client := algorithm.NewClient(credential)
 	result, err := client.ListPotentialDimensions(ctx, &algorithm.ListPotentialDimensionsParam{
-		FamilyName: "颜",
-		GivenName:  "吉灿",
+		FamilyName: "张",
+		GivenName:  "三丰",
 	})
 	if err != nil {
 		t.Fatal(err)
