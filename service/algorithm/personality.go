@@ -73,7 +73,7 @@ type ListPersonalityDimensionsParam struct {
 
 // 性格纬度列表结果
 type ListPersonalityDimensionsResult struct {
-	Items []Dimension `json:"items"`
+	Items []*Dimension `json:"items"`
 }
 
 // 获取性格纬度列表

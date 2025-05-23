@@ -71,7 +71,7 @@ type ListCycleDimensionsParam struct {
 
 // 周期纬度列表结果
 type ListCycleDimensionsResult struct {
-	Items []Dimension `json:"items"`
+	Items []*Dimension `json:"items"`
 }
 
 // 获取周期纬度列表

@@ -24,9 +24,9 @@ type GetPotentialParam struct {
 
 // 潜能结果
 type GetPotentialResult struct {
-	ID       int64              `json:"id,string"`
-	Elements []PotentialElement `json:"elements"`
-	Keywords []string           `json:"keywords"`
+	ID       int64               `json:"id,string"`
+	Elements []*PotentialElement `json:"elements"`
+	Keywords []string            `json:"keywords"`
 }
 
 // 获取潜能
@@ -66,7 +66,7 @@ type ListPotentialDimensionsParam struct {
 
 // 潜能纬度列表结果
 type ListPotentialDimensionsResult struct {
-	Items []Dimension `json:"items"`
+	Items []*Dimension `json:"items"`
 }
 
 // 获取潜能纬度列表
