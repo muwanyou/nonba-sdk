@@ -8,9 +8,10 @@ import (
 )
 
 type SubmitVerificationParam struct {
-	PhoneNumber        string `json:"phone_number"`
-	FullName           string `json:"full_name"`
+	FamilyName         string `json:"family_name"`
+	GivenName          string `json:"given_name"`
 	IdentityCardNumber string `json:"identity_card_number"`
+	PhoneNumber        string `json:"phone_number"`
 }
 
 type SubmitVerificationResult struct {
