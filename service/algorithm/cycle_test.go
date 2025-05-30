@@ -14,7 +14,7 @@ func TestGetCycle(t *testing.T) {
 	ctx := context.Background()
 	credential := core.NewCredential("3b6d4e442cf7422cb8431419068802f6", "1", "PJ8^yl*s5jG*Yvhlgm5N!u0Suljnx^K&")
 	client := algorithm.NewClient(credential)
-	result, err := client.GetCycle(ctx, &algorithm.GetCycleParam{
+	Output, err := client.GetCycle(ctx, &algorithm.GetCycleInput{
 		TimeUnit:   enum.TimeUnitYear,
 		Polarity:   enum.CyclePolarityPositive,
 		FamilyName: "张",
@@ -26,14 +26,14 @@ func TestGetCycle(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Log(result)
+	t.Log(Output)
 }
 
 func TestListCycleDimensions(t *testing.T) {
 	ctx := context.Background()
 	credential := core.NewCredential("3b6d4e442cf7422cb8431419068802f6", "1", "PJ8^yl*s5jG*Yvhlgm5N!u0Suljnx^K&")
 	client := algorithm.NewClient(credential)
-	result, err := client.ListCycleDimensions(ctx, &algorithm.ListCycleDimensionsParam{
+	Output, err := client.ListCycleDimensions(ctx, &algorithm.ListCycleDimensionsInput{
 		TimeUnit:   enum.TimeUnitYear,
 		Polarity:   enum.CyclePolarityPositive,
 		FamilyName: "张",
@@ -45,5 +45,5 @@ func TestListCycleDimensions(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Log(result)
+	t.Log(Output)
 }

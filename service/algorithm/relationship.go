@@ -9,7 +9,7 @@ import (
 )
 
 // 关系参数
-type ListRelationshipsParam struct {
+type ListRelationshipsInput struct {
 	SubjectFamilyName string    `json:"subject_family_name"`
 	SubjectGivenName  string    `json:"subject_given_name"`
 	SubjectSex        enum.Sex  `json:"subject_sex"`
@@ -21,13 +21,13 @@ type ListRelationshipsParam struct {
 }
 
 // 关系结果
-type ListRelationshipsResult struct {
+type ListRelationshipsOutput struct {
 	Items []string `json:"items"`
 }
 
 // 关系列表
-func (c *Client) ListRelationships(ctx context.Context, param *ListRelationshipsParam) (*ListRelationshipsResult, error) {
-	bytes, err := json.Marshal(param)
+func (c *Client) ListRelationships(ctx context.Context, input *ListRelationshipsInput) (*ListRelationshipsOutput, error) {
+	bytes, err := json.Marshal(input)
 	if err != nil {
 		return nil, err
 	}
@@ -46,10 +46,10 @@ func (c *Client) ListRelationships(ctx context.Context, param *ListRelationships
 	if err != nil {
 		return nil, err
 	}
-	result := new(ListRelationshipsResult)
-	err = json.Unmarshal(response.GetBody(), &result)
+	output := new(ListRelationshipsOutput)
+	err = json.Unmarshal(response.GetBody(), &output)
 	if err != nil {
 		return nil, err
 	}
-	return result, nil
+	return output, nil
 }

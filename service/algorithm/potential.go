@@ -17,21 +17,21 @@ type PotentialElement struct {
 }
 
 // 潜能参数
-type GetPotentialParam struct {
+type GetPotentialInput struct {
 	FamilyName string `json:"family_name"`
 	GivenName  string `json:"given_name"`
 }
 
 // 潜能结果
-type GetPotentialResult struct {
+type GetPotentialOutput struct {
 	ID       int64               `json:"id,string"`
 	Elements []*PotentialElement `json:"elements"`
 	Keywords []string            `json:"keywords"`
 }
 
 // 获取潜能
-func (c *Client) GetPotential(ctx context.Context, param *GetPotentialParam) (*GetPotentialResult, error) {
-	bytes, err := json.Marshal(param)
+func (c *Client) GetPotential(ctx context.Context, input *GetPotentialInput) (*GetPotentialOutput, error) {
+	bytes, err := json.Marshal(input)
 	if err != nil {
 		return nil, err
 	}
@@ -50,28 +50,28 @@ func (c *Client) GetPotential(ctx context.Context, param *GetPotentialParam) (*G
 	if err != nil {
 		return nil, err
 	}
-	result := new(GetPotentialResult)
-	err = json.Unmarshal(response.GetBody(), &result)
+	output := new(GetPotentialOutput)
+	err = json.Unmarshal(response.GetBody(), &output)
 	if err != nil {
 		return nil, err
 	}
-	return result, nil
+	return output, nil
 }
 
 // 潜能纬度列表参数
-type ListPotentialDimensionsParam struct {
+type ListPotentialDimensionsInput struct {
 	FamilyName string `json:"family_name"`
 	GivenName  string `json:"given_name"`
 }
 
 // 潜能纬度列表结果
-type ListPotentialDimensionsResult struct {
+type ListPotentialDimensionsOutput struct {
 	Items []*Dimension `json:"items"`
 }
 
 // 获取潜能纬度列表
-func (c *Client) ListPotentialDimensions(ctx context.Context, param *ListPotentialDimensionsParam) (*ListPotentialDimensionsResult, error) {
-	bytes, err := json.Marshal(param)
+func (c *Client) ListPotentialDimensions(ctx context.Context, input *ListPotentialDimensionsInput) (*ListPotentialDimensionsOutput, error) {
+	bytes, err := json.Marshal(input)
 	if err != nil {
 		return nil, err
 	}
@@ -90,10 +90,10 @@ func (c *Client) ListPotentialDimensions(ctx context.Context, param *ListPotenti
 	if err != nil {
 		return nil, err
 	}
-	result := new(ListPotentialDimensionsResult)
-	err = json.Unmarshal(response.GetBody(), &result)
+	output := new(ListPotentialDimensionsOutput)
+	err = json.Unmarshal(response.GetBody(), &output)
 	if err != nil {
 		return nil, err
 	}
-	return result, nil
+	return output, nil
 }

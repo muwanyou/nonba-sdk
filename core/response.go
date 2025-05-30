@@ -14,7 +14,7 @@ type Response interface {
 	GetError() error
 }
 
-type ErrorResult struct {
+type Error struct {
 	Code     int16  `json:"code"`
 	Reason   string `json:"reason"`
 	Message  string `json:"message"`
@@ -52,7 +52,7 @@ func (r *BaseResponse) GetError() error {
 	if r.GetCode() == http.StatusOK {
 		return nil
 	}
-	result := new(ErrorResult)
+	result := new(Error)
 	err := json.Unmarshal(r.GetBody(), &result)
 	if err != nil {
 		return err

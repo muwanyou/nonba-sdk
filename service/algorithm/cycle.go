@@ -10,7 +10,7 @@ import (
 )
 
 // 周期参数
-type GetCycleParam struct {
+type GetCycleInput struct {
 	TimeUnit   enum.TimeUnit      `json:"time_unit"`
 	Polarity   enum.CyclePolarity `json:"polarity"`
 	FamilyName string             `json:"family_name"`
@@ -21,15 +21,15 @@ type GetCycleParam struct {
 }
 
 // 周期结果
-type GetCycleResult struct {
+type GetCycleOutput struct {
 	ID     int64  `json:"id,string"`
 	Name   string `json:"name"`
 	Impact string `json:"impact"`
 }
 
 // 获取周期
-func (c *Client) GetCycle(ctx context.Context, param *GetCycleParam) (*GetCycleResult, error) {
-	bytes, err := json.Marshal(param)
+func (c *Client) GetCycle(ctx context.Context, input *GetCycleInput) (*GetCycleOutput, error) {
+	bytes, err := json.Marshal(input)
 	if err != nil {
 		return nil, err
 	}
@@ -41,23 +41,23 @@ func (c *Client) GetCycle(ctx context.Context, param *GetCycleParam) (*GetCycleR
 	request := NewRequest()
 	request.SetContext(ctx).
 		SetMethod(enum.MethodGet).
-		SetPath(fmt.Sprintf("/cycles/%s/%s", param.TimeUnit, param.Polarity)).
+		SetPath(fmt.Sprintf("/cycles/%s/%s", input.TimeUnit, input.Polarity)).
 		SetQuery(query)
 	response := NewResponse()
 	err = c.Send(request, response)
 	if err != nil {
 		return nil, err
 	}
-	result := new(GetCycleResult)
-	err = json.Unmarshal(response.GetBody(), &result)
+	output := new(GetCycleOutput)
+	err = json.Unmarshal(response.GetBody(), &output)
 	if err != nil {
 		return nil, err
 	}
-	return result, nil
+	return output, nil
 }
 
 // 周期纬度列表参数
-type ListCycleDimensionsParam struct {
+type ListCycleDimensionsInput struct {
 	TimeUnit   enum.TimeUnit      `json:"time_unit"`
 	Polarity   enum.CyclePolarity `json:"polarity"`
 	FamilyName string             `json:"family_name"`
@@ -70,13 +70,13 @@ type ListCycleDimensionsParam struct {
 }
 
 // 周期纬度列表结果
-type ListCycleDimensionsResult struct {
+type ListCycleDimensionsOutput struct {
 	Items []*Dimension `json:"items"`
 }
 
 // 获取周期纬度列表
-func (c *Client) ListCycleDimensions(ctx context.Context, param *ListCycleDimensionsParam) (*ListCycleDimensionsResult, error) {
-	bytes, err := json.Marshal(param)
+func (c *Client) ListCycleDimensions(ctx context.Context, input *ListCycleDimensionsInput) (*ListCycleDimensionsOutput, error) {
+	bytes, err := json.Marshal(input)
 	if err != nil {
 		return nil, err
 	}
@@ -88,17 +88,17 @@ func (c *Client) ListCycleDimensions(ctx context.Context, param *ListCycleDimens
 	request := NewRequest()
 	request.SetContext(ctx).
 		SetMethod(enum.MethodGet).
-		SetPath(fmt.Sprintf("/cycles/%s/%s/dimensions", param.TimeUnit, param.Polarity)).
+		SetPath(fmt.Sprintf("/cycles/%s/%s/dimensions", input.TimeUnit, input.Polarity)).
 		SetQuery(query)
 	response := NewResponse()
 	err = c.Send(request, response)
 	if err != nil {
 		return nil, err
 	}
-	result := new(ListCycleDimensionsResult)
-	err = json.Unmarshal(response.GetBody(), &result)
+	output := new(ListCycleDimensionsOutput)
+	err = json.Unmarshal(response.GetBody(), &output)
 	if err != nil {
 		return nil, err
 	}
-	return result, nil
+	return output, nil
 }

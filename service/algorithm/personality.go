@@ -10,7 +10,7 @@ import (
 )
 
 // 性格参数
-type GetPersonalityParam struct {
+type GetPersonalityInput struct {
 	Timeline   enum.Timeline `json:"timeline"`
 	FamilyName string        `json:"family_name"`
 	GivenName  string        `json:"given_name"`
@@ -20,7 +20,7 @@ type GetPersonalityParam struct {
 }
 
 // 性格结果
-type GetPersonalityResult struct {
+type GetPersonalityOutput struct {
 	ID          int64  `json:"id,string"`
 	Name        string `json:"name"`
 	Alias       string `json:"alias"`
@@ -31,8 +31,8 @@ type GetPersonalityResult struct {
 }
 
 // 获取性格
-func (c *Client) GetPersonality(ctx context.Context, param *GetPersonalityParam) (*GetPersonalityResult, error) {
-	bytes, err := json.Marshal(param)
+func (c *Client) GetPersonality(ctx context.Context, input *GetPersonalityInput) (*GetPersonalityOutput, error) {
+	bytes, err := json.Marshal(input)
 	if err != nil {
 		return nil, err
 	}
@@ -44,23 +44,23 @@ func (c *Client) GetPersonality(ctx context.Context, param *GetPersonalityParam)
 	request := NewRequest()
 	request.SetContext(ctx).
 		SetMethod(enum.MethodGet).
-		SetPath(fmt.Sprintf("/personalities/%s", param.Timeline)).
+		SetPath(fmt.Sprintf("/personalities/%s", input.Timeline)).
 		SetQuery(query)
 	response := NewResponse()
 	err = c.Send(request, response)
 	if err != nil {
 		return nil, err
 	}
-	result := new(GetPersonalityResult)
-	err = json.Unmarshal(response.GetBody(), &result)
+	output := new(GetPersonalityOutput)
+	err = json.Unmarshal(response.GetBody(), &output)
 	if err != nil {
 		return nil, err
 	}
-	return result, nil
+	return output, nil
 }
 
 // 性格纬度列表参数
-type ListPersonalityDimensionsParam struct {
+type ListPersonalityDimensionsInput struct {
 	Timeline   enum.Timeline `json:"timeline"`
 	FamilyName string        `json:"family_name"`
 	GivenName  string        `json:"given_name"`
@@ -72,13 +72,13 @@ type ListPersonalityDimensionsParam struct {
 }
 
 // 性格纬度列表结果
-type ListPersonalityDimensionsResult struct {
+type ListPersonalityDimensionsOutput struct {
 	Items []*Dimension `json:"items"`
 }
 
 // 获取性格纬度列表
-func (c *Client) ListPersonalityDimensions(ctx context.Context, param *ListPersonalityDimensionsParam) (*ListPersonalityDimensionsResult, error) {
-	bytes, err := json.Marshal(param)
+func (c *Client) ListPersonalityDimensions(ctx context.Context, input *ListPersonalityDimensionsInput) (*ListPersonalityDimensionsOutput, error) {
+	bytes, err := json.Marshal(input)
 	if err != nil {
 		return nil, err
 	}
@@ -90,17 +90,17 @@ func (c *Client) ListPersonalityDimensions(ctx context.Context, param *ListPerso
 	request := NewRequest()
 	request.SetContext(ctx).
 		SetMethod(enum.MethodGet).
-		SetPath(fmt.Sprintf("/personalities/%s/dimensions", param.Timeline)).
+		SetPath(fmt.Sprintf("/personalities/%s/dimensions", input.Timeline)).
 		SetQuery(query)
 	response := NewResponse()
 	err = c.Send(request, response)
 	if err != nil {
 		return nil, err
 	}
-	result := new(ListPersonalityDimensionsResult)
-	err = json.Unmarshal(response.GetBody(), &result)
+	output := new(ListPersonalityDimensionsOutput)
+	err = json.Unmarshal(response.GetBody(), &output)
 	if err != nil {
 		return nil, err
 	}
-	return result, nil
+	return output, nil
 }

@@ -14,7 +14,7 @@ func TestListRelationships(t *testing.T) {
 	ctx := context.Background()
 	credential := core.NewCredential("3b6d4e442cf7422cb8431419068802f6", "1", "PJ8^yl*s5jG*Yvhlgm5N!u0Suljnx^K&")
 	client := algorithm.NewClient(credential)
-	result, err := client.ListRelationships(ctx, &algorithm.ListRelationshipsParam{
+	Output, err := client.ListRelationships(ctx, &algorithm.ListRelationshipsInput{
 		SubjectFamilyName: "颜",
 		SubjectGivenName:  "吉灿",
 		SubjectSex:        enum.SexMale,
@@ -27,5 +27,5 @@ func TestListRelationships(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Log(result)
+	t.Log(Output)
 }

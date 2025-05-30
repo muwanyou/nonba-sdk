@@ -12,26 +12,26 @@ func TestGetPotential(t *testing.T) {
 	ctx := context.Background()
 	credential := core.NewCredential("3b6d4e442cf7422cb8431419068802f6", "1", "PJ8^yl*s5jG*Yvhlgm5N!u0Suljnx^K&")
 	client := algorithm.NewClient(credential)
-	result, err := client.GetPotential(ctx, &algorithm.GetPotentialParam{
+	Output, err := client.GetPotential(ctx, &algorithm.GetPotentialInput{
 		FamilyName: "张",
 		GivenName:  "三丰",
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Log(result)
+	t.Log(Output)
 }
 
 func TestListPotentialDimensions(t *testing.T) {
 	ctx := context.Background()
 	credential := core.NewCredential("3b6d4e442cf7422cb8431419068802f6", "1", "PJ8^yl*s5jG*Yvhlgm5N!u0Suljnx^K&")
 	client := algorithm.NewClient(credential)
-	result, err := client.ListPotentialDimensions(ctx, &algorithm.ListPotentialDimensionsParam{
+	Output, err := client.ListPotentialDimensions(ctx, &algorithm.ListPotentialDimensionsInput{
 		FamilyName: "张",
 		GivenName:  "三丰",
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Log(result)
+	t.Log(Output)
 }

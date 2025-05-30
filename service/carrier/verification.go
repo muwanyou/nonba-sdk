@@ -7,18 +7,18 @@ import (
 	"github.com/muwanyou/nonba-sdk/enum"
 )
 
-type SubmitVerificationParam struct {
+type SubmitVerificationInput struct {
 	FamilyName         string `json:"family_name"`
 	GivenName          string `json:"given_name"`
 	IdentityCardNumber string `json:"identity_card_number"`
 	PhoneNumber        string `json:"phone_number"`
 }
 
-type SubmitVerificationResult struct {
+type SubmitVerificationOutput struct {
 }
 
-func (c *Client) SubmitVerification(ctx context.Context, params *SubmitVerificationParam) (*SubmitVerificationResult, error) {
-	body, err := json.Marshal(params)
+func (c *Client) SubmitVerification(ctx context.Context, input *SubmitVerificationInput) (*SubmitVerificationOutput, error) {
+	body, err := json.Marshal(input)
 	if err != nil {
 		return nil, err
 	}
@@ -32,10 +32,10 @@ func (c *Client) SubmitVerification(ctx context.Context, params *SubmitVerificat
 	if err != nil {
 		return nil, err
 	}
-	result := new(SubmitVerificationResult)
-	err = json.Unmarshal(response.GetBody(), &result)
+	output := new(SubmitVerificationOutput)
+	err = json.Unmarshal(response.GetBody(), &output)
 	if err != nil {
 		return nil, err
 	}
-	return result, nil
+	return output, nil
 }

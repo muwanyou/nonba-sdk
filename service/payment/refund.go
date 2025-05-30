@@ -8,60 +8,60 @@ import (
 	"github.com/muwanyou/nonba-sdk/enum"
 )
 
-type CreateRefundParam struct {
+type CreateRefundInput struct {
 	Reason      string                  `json:"reason"`
 	ClientIP    string                  `json:"client_ip"`
-	Transaction *RefundTransactionParam `json:"transaction"`
-	Order       *RefundOrderParam       `json:"order"`
-	Amount      *RefundAmountParam      `json:"amount"`
+	Transaction *RefundTransactionInput `json:"transaction"`
+	Order       *RefundOrderInput       `json:"order"`
+	Amount      *RefundAmountInput      `json:"amount"`
 	NotifyUrl   string                  `json:"notify_url"`
 }
 
-type RefundTransactionParam struct {
+type RefundTransactionInput struct {
 	Number string `json:"number"`
 }
 
-type RefundOrderParam struct {
+type RefundOrderInput struct {
 	Number string `json:"number"`
 }
 
-type RefundAmountParam struct {
+type RefundAmountInput struct {
 	Currency string `json:"currency"`
 	Total    int64  `json:"total"`
 }
 
-type CreateRefundResult struct {
-	Transaction *RefundTransactionParam `json:"transaction"`
-	Order       *RefundOrderParam       `json:"order"`
+type CreateRefundOutput struct {
+	Transaction *RefundTransactionInput `json:"transaction"`
+	Order       *RefundOrderInput       `json:"order"`
 }
 
-type RefundTransactionResult struct {
+type RefundTransactionOutput struct {
 	Number string `json:"number"`
 }
 
-type RefundOrderResult struct {
+type RefundOrderOutput struct {
 	Number string `json:"number"`
 }
 
-func (c *Client) CreateRefund(ctx context.Context, param *CreateRefundParam) (*CreateRefundResult, error) {
-	body, err := json.Marshal(param)
+func (c *Client) CreateRefund(ctx context.Context, input *CreateRefundInput) (*CreateRefundOutput, error) {
+	body, err := json.Marshal(input)
 	if err != nil {
 		return nil, err
 	}
 	request := NewRequest()
 	request.SetContext(ctx).
 		SetMethod(enum.MethodPost).
-		SetPath(fmt.Sprintf("/charges/%s/refunds", param.Transaction.Number)).
+		SetPath(fmt.Sprintf("/charges/%s/refunds", input.Transaction.Number)).
 		SetBody(body)
 	response := NewResponse()
 	err = c.Send(request, response)
 	if err != nil {
 		return nil, err
 	}
-	result := new(CreateRefundResult)
-	err = json.Unmarshal(response.GetBody(), &result)
+	output := new(CreateRefundOutput)
+	err = json.Unmarshal(response.GetBody(), &output)
 	if err != nil {
 		return nil, err
 	}
-	return result, nil
+	return output, nil
 }

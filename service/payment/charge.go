@@ -7,64 +7,64 @@ import (
 	"github.com/muwanyou/nonba-sdk/enum"
 )
 
-type CreateChargeParam struct {
+type CreateChargeInput struct {
 	Type      string             `json:"type"`
 	Mode      string             `json:"mode"`
-	Payer     *ChargePayerParam  `json:"payer"`
-	Device    *ChargeDeviceParam `json:"device"`
-	Order     *ChargeOrderParam  `json:"order"`
-	Amount    *ChargeAmountParam `json:"amount"`
+	Payer     *ChargePayerInput  `json:"payer"`
+	Device    *ChargeDeviceInput `json:"device"`
+	Order     *ChargeOrderInput  `json:"order"`
+	Amount    *ChargeAmountInput `json:"amount"`
 	NotifyUrl string             `json:"notify_url"`
 }
 
-type ChargePayerParam struct {
+type ChargePayerInput struct {
 	OpenID   string `json:"open_id"`
 	ClientIP string `json:"client_ip"`
 }
 
-type ChargeDeviceParam struct {
+type ChargeDeviceInput struct {
 	ID   string `json:"id"`
 	Type string `json:"type"`
 	Name string `json:"name"`
 }
 
-type ChargeOrderParam struct {
+type ChargeOrderInput struct {
 	Number  string `json:"number"`
 	Subject string `json:"subject"`
 	Body    string `json:"body"`
 }
 
-type ChargeAmountParam struct {
+type ChargeAmountInput struct {
 	Currency string `json:"currency"`
 	Total    int64  `json:"total"`
 }
 
-type CreateChargeResult struct {
+type CreateChargeOutput struct {
 	Type        string                   `json:"type"`
 	Mode        string                   `json:"mode"`
-	Transaction *ChargeTransactionResult `json:"transaction"`
-	Order       *ChargeOrderResult       `json:"order"`
-	Amount      *ChargeAmountResult      `json:"amount"`
+	Transaction *ChargeTransactionOutput `json:"transaction"`
+	Order       *ChargeOrderOutput       `json:"order"`
+	Amount      *ChargeAmountOutput      `json:"amount"`
 	Credential  any                      `json:"credential"`
 }
 
-type ChargeTransactionResult struct {
+type ChargeTransactionOutput struct {
 	Number string `json:"number"`
 }
 
-type ChargeOrderResult struct {
+type ChargeOrderOutput struct {
 	Number  string `json:"number"`
 	Subject string `json:"subject"`
 	Body    string `json:"body"`
 }
 
-type ChargeAmountResult struct {
+type ChargeAmountOutput struct {
 	Currency string `json:"currency"`
 	Total    int64  `json:"total"`
 }
 
-func (c *Client) CreateCharge(ctx context.Context, param *CreateChargeParam) (*CreateChargeResult, error) {
-	body, err := json.Marshal(param)
+func (c *Client) CreateCharge(ctx context.Context, input *CreateChargeInput) (*CreateChargeOutput, error) {
+	body, err := json.Marshal(input)
 	if err != nil {
 		return nil, err
 	}
@@ -78,10 +78,10 @@ func (c *Client) CreateCharge(ctx context.Context, param *CreateChargeParam) (*C
 	if err != nil {
 		return nil, err
 	}
-	result := new(CreateChargeResult)
-	err = json.Unmarshal(response.GetBody(), &result)
+	output := new(CreateChargeOutput)
+	err = json.Unmarshal(response.GetBody(), &output)
 	if err != nil {
 		return nil, err
 	}
-	return result, nil
+	return output, nil
 }
