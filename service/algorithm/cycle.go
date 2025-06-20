@@ -22,9 +22,10 @@ type GetCycleInput struct {
 
 // 周期结果
 type GetCycleOutput struct {
-	ID     int64  `json:"id,string"`
-	Name   string `json:"name"`
-	Impact string `json:"impact"`
+	ID          int64  `json:"id,string"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	Impact      string `json:"impact"`
 }
 
 // 获取周期
