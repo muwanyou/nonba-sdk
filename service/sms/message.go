@@ -11,7 +11,7 @@ type SendMessageInput struct {
 	TemplateID     int64    `json:"template_id,omitempty"`
 	SignatureID    int64    `json:"signature_id,omitempty"`
 	PhoneNumber    string   `json:"phone_number,omitempty"`
-	TemplateInputs []string `json:"template_Inputs,omitempty"`
+	TemplateParams []string `json:"template_params,omitempty"`
 }
 
 type SendMessageOutput struct {
