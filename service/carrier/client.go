@@ -26,7 +26,7 @@ func NewRequest() *Request {
 		// WithHost("api.carrier.nonba.net").
 		// WithPort(443).
 		WithScheme(enum.SchemeHttp).
-		WithHost("112.5.167.217").
+		WithHost("120.36.140.210").
 		WithPort(8030).
 		WithVersion("1")
 	return request
